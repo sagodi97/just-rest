@@ -1,0 +1,29 @@
+{
+  "name": "just-rest",
+  "version": "1.0.0",
+  "description": "My first REST application. Using Mongoose and Node.js ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagodi97/just-rest.git"
+  },
+  "author": "Santiago Gonzalez <santiago@broski.me>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sagodi97/just-rest/issues"
+  },
+  "homepage": "https://github.com/sagodi97/just-rest#readme",
+  "dependencies": {
+    "mongoose": "^5.4.10",
+    "restify": "^7.7.0",
+    "restify-errors": "^6.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
