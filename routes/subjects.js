@@ -4,10 +4,33 @@ const Subject = require('../models/Subject');
 
 module.exports = server => {
     server.get('/subjects', async (req, res, next) => {
+        
+        console.log(`Got a GET requester! -> ${req.getRoute().name} `);
         try {
-            var subjects = await Subject.find({});
-            // const resp = Object.assign({Average:}) //Figure it out...
+            const subjects = await Subject.find({});
             res.send(subjects);
+            next();
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
+    server.get('/subjects/average', async (req, res, next) => {
+        
+        console.log(`Got a GET requester! -> ${req.getRoute().name} `);
+        try {
+            const subjects = await Subject.find({});
+            var fRe = subjects;
+            var sum = 0;
+            var count = 0;
+            for(i in fRe){
+                mrk = parseInt(fRe[i].mark.toString());
+                sum += mrk;
+                count++;
+            } 
+            res.send({
+                studentAvg: `${parseFloat((sum/count).toFixed(2))}`
+            });
             next();
         } catch (error) {
             console.log(error);
