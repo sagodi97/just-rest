@@ -1,8 +1,9 @@
-const errors = ('restify.errors');
+const errors = require('restify-errors');
 const mongoose = require('mongoose');
 const Subject = require('../models/Subject');
 
 module.exports = server => {
+    //Get list of Subjects and details.
     server.get('/subjects', async (req, res, next) => {
         
         console.log(`Got a GET requester! -> ${req.getRoute().name} `);
@@ -15,6 +16,7 @@ module.exports = server => {
         }
     });
 
+    //Get student's average
     server.get('/subjects/average', async (req, res, next) => {
         
         console.log(`Got a GET requester! -> ${req.getRoute().name} `);
@@ -33,10 +35,24 @@ module.exports = server => {
             });
             next();
         } catch (error) {
-            console.log(error);
+            return next(new errors.InvalidContentError(err));
         }
     });
 
+    //Get Subject By Id
+    server.get('/subjects/:id', async (req, res, next) => {
+        
+        console.log(`Got a GET requester! -> ${req.getRoute().name} `);
+        try {
+            const subject = await Subject.findById(req.params.id);
+            res.send(subject);
+            next();
+        } catch (error) {
+            next(new errors.ResourceNotFoundError(`There is no Subject with id: ${req.params.id}`));
+        }
+    });
+
+    //Post New Subject
     server.post('/subjects', async (req, res, next) => {
         if(!req.is('application/json')){
             return next(`Expecting 'application/json, got '${req}'`);
