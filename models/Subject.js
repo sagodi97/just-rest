@@ -15,6 +15,21 @@ const subjectSchema = new mongoose.Schema({
     mark: {
         type: mongoose.Decimal128,
         default:0
+    },
+    type: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    teacher: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    semester: {
+        type: String,
+        required: true,
+        trim: true
     }
 });
 
